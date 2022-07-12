@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks:</title>
+</head>
+<body>
+    <a href="{{ url_for('show_projects') }}">Back to projects</a>
+
+    <h1>Project: {{project.title}}</h1>
+    <ul>
+        {% for i in tasks %}
+        <li>Task {{i.task_id}}: {{i.description}}</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+
+    <h3>Add new task</h3>
+    <form method="post" action="/add/task/{{project.project_id}}">
+        <fieldset>
+            <legend>New task details </legend>
+            Project name: <input type="text" name="taskdescription"><br>
+            <input type="submit" value="Add task">
+
+        </fieldset>
+    </form>
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div style="color: {{category}};">{{ message }}</div>
+    {% endfor %}
+</body>
+</html>
