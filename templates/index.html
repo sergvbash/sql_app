@@ -9,7 +9,7 @@
 
     <ul>
         {% for i in projects %}
-        <li><a href="/project/{{i.project_id}}">Project {{i.project_id}}: {{i.title}}</a></li>
+        <li><a href="/project/{{i.project_id}}">Project: {{i.title}}</a></li>
         {% endfor %}
     </ul>
 
@@ -24,15 +24,15 @@
 
         </fieldset>
     </form>
-    <form method="post" action="/delete/project">
-        <fieldset>
-            <legend>Delete project </legend>
-            Project ID: <input type="number" name="projectid"><br>
-            Delete associated tasks: <input type="checkbox" name="plustasks" value="checked"><br>
-            <input type="submit" value="Delete project">
+<!--    <form method="post" action="/delete/project">-->
+<!--        <fieldset>-->
+<!--            <legend>Delete project </legend>-->
+<!--            Project ID: <input type="number" name="projectid"><br>-->
+<!--            Delete associated tasks: <input type="checkbox" name="plustasks" value="checked"><br>-->
+<!--            <input type="submit" value="Delete project">-->
 
-        </fieldset>
-    </form>
+<!--        </fieldset>-->
+<!--    </form>-->
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div style="color: {{category}};">{{ message }}</div>
     {% endfor %}

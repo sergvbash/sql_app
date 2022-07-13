@@ -14,6 +14,7 @@ class Project(db.Model):
     project_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
 
+    task = db.relationship('Task', cascade='all, delete-orphan')
 
 class Task(db.Model):
     __tablename__ = 'tasks'
@@ -63,43 +64,22 @@ def add_task(project_id):
 
 @app.route('/delete/task/<project_id>', methods=['post'])
 def del_task(project_id):
-    task_id = request.form['taskid']
-    if task_id:
-        tasktodel = Task.query.filter_by(task_id=task_id).first()
-        if tasktodel:
-            db.session.delete(tasktodel)
-            db.session.commit()
-            flash('The task was successfully deleted', 'green')
-        else:
-            flash('There is no task with suth an ID', 'red')
-    else:
-        flash('Enter an ID of a task to delete', 'red')
+    tasksd_id = request.form.getlist('tasktodel')
+    for taskd_id in tasksd_id:
+        tasktodel = Task.query.filter_by(task_id=taskd_id).first()
+        db.session.delete(tasktodel)
+        db.session.flush()
+    db.session.commit()
+    flash('The tasks were successfully deleted', 'green')
     return redirect(url_for('show_tasks', project_id=project_id))
 
-@app.route('/delete/project/', methods=['post'])
-def del_project():
-    project_id = request.form['projectid']
-    all_tasks = request.form.get('plustasks')
-    if project_id:
+@app.route('/delete/project/<project_id>', methods=['post'])
+def del_project(project_id):
         projecttodel = Project.query.filter_by(project_id=project_id).first()
-        if projecttodel:
-            if all_tasks=='checked':
-                taskstodel = Task.query.filter_by(project_id=project_id).all()
-                for tasktodel in taskstodel:
-                    db.session.delete(tasktodel)
-                    db.session.flush()
-                db.session.delete(projecttodel)
-                db.session.commit()
-                flash('The project and all tasks were successfully deleted', 'green')
-            else:
-                db.session.delete(projecttodel)
-                db.session.commit()
-                flash('The project was successfully deleted', 'green')
-        else:
-            flash('There is no project with suth an ID', 'red')
-    else:
-        flash('Enter an ID of a project to delete', 'red')
-    return redirect(url_for('show_projects'))
+        db.session.delete(projecttodel)
+        db.session.commit()
+        flash('The project and all tasks were successfully deleted', 'green')
+        return redirect(url_for('show_projects'))
 
 
 

@@ -8,12 +8,17 @@
     <a href="{{ url_for('show_projects') }}">Back to projects</a>
 
     <h1>Project: {{project.title}}</h1>
+    <form method="post" action="/delete/project/{{project.project_id}}">
+            <input type="submit" value="Delete project">
+    </form>
+    <form method="post" action="/delete/task/{{project.project_id}}">
     <ul>
         {% for i in tasks %}
-        <li>Task ID {{i.task_id}}: {{i.description}}</li>
+        <li>Task ID {{i.task_id}}: {{i.description}} <input type="checkbox" name="tasktodel" value={{i.task_id}}> </li>
         {% endfor %}
     </ul>
-
+        <input type="submit" value="Delete all marked!">
+    </form>
     <br>
 
     <h3>Add new task</h3>
@@ -25,14 +30,14 @@
 
         </fieldset>
     </form>
-    <form method="post" action="/delete/task/{{project.project_id}}">
-        <fieldset>
-            <legend>Delete task </legend>
-            Task ID: <input type="number" name="taskid"><br>
-            <input type="submit" value="Delete task">
+<!--    <form method="post" action="/delete/task/{{project.project_id}}">-->
+<!--        <fieldset>-->
+<!--            <legend>Delete task </legend>-->
+<!--            Task ID: <input type="number" name="taskid"><br>-->
+<!--            <input type="submit" value="Delete task">-->
 
-        </fieldset>
-    </form>
+<!--        </fieldset>-->
+<!--    </form>-->
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div style="color: {{category}};">{{ message }}</div>
     {% endfor %}
