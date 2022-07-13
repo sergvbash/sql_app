@@ -20,10 +20,11 @@ class Task(Base):
     __tablename__ = 'tasks'
 
     task_id = Column(Integer, primary_key=True)
-    project_id = Column(Integer, ForeignKey('projects.project_id'))
+    # project_id = Column(Integer, ForeignKey('projects.project_id'))
+    project_id = Column(Integer)
     description = Column(String(100))
 
-    project = relationship('Project')
+    # project = relationship('Project')
 
     def __repr__(self):
         return "<Task(task_id = '{0}', project_id='{1}', description='{2}')".format(self.task_id, self.project_id, self.description)

@@ -10,7 +10,7 @@
     <h1>Project: {{project.title}}</h1>
     <ul>
         {% for i in tasks %}
-        <li>Task {{i.task_id}}: {{i.description}}</li>
+        <li>Task ID {{i.task_id}}: {{i.description}}</li>
         {% endfor %}
     </ul>
 
@@ -20,13 +20,23 @@
     <form method="post" action="/add/task/{{project.project_id}}">
         <fieldset>
             <legend>New task details </legend>
-            Project name: <input type="text" name="taskdescription"><br>
+            Task name: <input type="text" name="taskdescription"><br>
             <input type="submit" value="Add task">
+
+        </fieldset>
+    </form>
+    <form method="post" action="/delete/task/{{project.project_id}}">
+        <fieldset>
+            <legend>Delete task </legend>
+            Task ID: <input type="number" name="taskid"><br>
+            <input type="submit" value="Delete task">
 
         </fieldset>
     </form>
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div style="color: {{category}};">{{ message }}</div>
     {% endfor %}
+
+
 </body>
 </html>

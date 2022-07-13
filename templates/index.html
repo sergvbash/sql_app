@@ -24,6 +24,15 @@
 
         </fieldset>
     </form>
+    <form method="post" action="/delete/project">
+        <fieldset>
+            <legend>Delete project </legend>
+            Project ID: <input type="number" name="projectid"><br>
+            Delete associated tasks: <input type="checkbox" name="plustasks" value="checked"><br>
+            <input type="submit" value="Delete project">
+
+        </fieldset>
+    </form>
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div style="color: {{category}};">{{ message }}</div>
     {% endfor %}
