@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://User:saraBarabu0@localhost/project_tracker'
 app.config['SECRET_KEY'] = '\xeatj\xbcgk\x8e0W\xe6\x06\x8d\x12\x13\xef\xca\xb5\x8aa\xa7I\xcf\xf9\x18'
@@ -86,4 +87,4 @@ def del_project(project_id):
 
 
 
-app.run(debug=True, host='127.0.0.1', port=3000)
+app.run(debug=True, host='127.0.0.1', port=3100)
